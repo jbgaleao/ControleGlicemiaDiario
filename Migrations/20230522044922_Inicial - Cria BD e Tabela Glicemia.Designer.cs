@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ControleGlicemiaDiario.Migrations
 {
     [DbContext(typeof(GlicemiaContext))]
-    [Migration("20230522035744_Inicial - Cria BD e Tabela Glicemia")]
+    [Migration("20230522044922_Inicial - Cria BD e Tabela Glicemia")]
     partial class InicialCriaBDeTabelaGlicemia
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,20 +32,20 @@ namespace ControleGlicemiaDiario.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("DataAplicacao")
+                    b.Property<DateTime>("DataHoraAplicacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataHoraMedicao")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("DoseAjuste")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DoseRegulat")
+                    b.Property<int?>("DoseRegular")
                         .HasColumnType("int");
 
                     b.Property<int>("GlicemiaMedida")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("HoraAplicacao")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Observacao")
                         .HasColumnType("nvarchar(max)");
@@ -53,6 +53,41 @@ namespace ControleGlicemiaDiario.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GLICEMIAS");
+                });
+
+            modelBuilder.Entity("ControleGlicemiaDiario.ViewModels.GlicemiaVM", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DataHoraAplicação")
+                        .HasMaxLength(14)
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataHoraMedicao")
+                        .HasMaxLength(14)
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DoseAjuste")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DoseRegular")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GlicemiaMedida")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Observacao")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GlicemiaVM");
                 });
 #pragma warning restore 612, 618
         }

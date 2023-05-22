@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ControleGlicemiaDiario.ViewModels.GlicemiaVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DataHoraMedicao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataHoraAplicação)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GlicemiaMedida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoseRegular)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoseAjuste)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observacao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataHoraMedicao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataHoraAplicação)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GlicemiaMedida)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoseRegular)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoseAjuste)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observacao)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
